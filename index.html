@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cozy Player</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    .playback-options button.active .icon {
+      color: #bf3ff6;
+    }
+  </style>
+</head>
+<body>
+  <div class="player">
+    <div class="header small-box" style="margin-bottom: 0.1rem;">
+      <p id="track-info">Now Playing</p>
+    </div>
+
+    <div class="album-container" style="margin-bottom: 0.1rem;">
+      <img src="cover1.jpg" class="album-art" alt="Album Art" style="width: 300px; height: 250px;">
+    </div>
+
+    <input type="range" id="progress" value="0" min="0" max="100" style="margin: 0.1rem 0;">
+
+    <div class="footer-control-panel" style="margin-top: 0.1rem;">
+      <div class="footer-top-row">
+        <button class="track-button" onclick="prevSong()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 12L18 18V6L10 12Z" />
+            <rect x="6" y="6" width="2" height="12" />
+          </svg>
+        </button>
+
+        <button class="main-play-button" onclick="playPause()">
+          <svg id="play-icon" width="32" height="32" viewBox="0 0 24 24" fill="#8563a6" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5V19L19 12L8 5Z" />
+          </svg>
+        </button>
+
+        <button class="track-button" onclick="nextSong()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 12L6 6V18L14 12Z" />
+            <rect x="16" y="6" width="2" height="12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="footer-bottom-row">
+        <button class="menu-btn">Menu</button>
+        <div class="playback-options">
+          <button id="shuffle-btn" onclick="toggleShuffle()" aria-label="Shuffle">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon bi bi-shuffle" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.6 9.6 0 0 0 7.556 8a9.6 9.6 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.6 10.6 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.6 9.6 0 0 0 6.444 8a9.6 9.6 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5"/>
+    <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192"/>
+  </svg>
+</button>
+          <button id="repeat-one-btn" onclick="toggleRepeatOne()" aria-label="Repeat One">
+  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="icon bi bi-repeat" viewBox="0 0 16 16">
+    <path d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z"/>
+  </svg>
+</button>
+          <button id="repeat-all-btn" onclick="toggleRepeatAll()" aria-label="Repeat All">
+  <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="icon bi bi-infinity" viewBox="0 0 16 16">
+    <path d="M5.68 5.792 7.345 7.75 5.681 9.708a2.75 2.75 0 1 1 0-3.916ZM8 6.978 6.416 5.113l-.014-.015a3.75 3.75 0 1 0 0 5.304l.014-.015L8 8.522l1.584 1.865.014.015a3.75 3.75 0 1 0 0-5.304l-.014.015zm.656.772 1.663-1.958a2.75 2.75 0 1 1 0 3.916z"/>
+  </svg>
+</button>
+        </div>
+      </div>
+    </div>
+
+    <audio id="audio-player" controls style="display: none;"></audio>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
